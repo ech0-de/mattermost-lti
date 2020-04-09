@@ -1,0 +1,56 @@
+version: "3"
+
+services:
+  db:
+    build: mattermost-docker/db
+    read_only: true
+    restart: unless-stopped
+    volumes:
+      - ./volumes/db/var/lib/postgresql/data:/var/lib/postgresql/data
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - POSTGRES_USER=mmuser
+      - POSTGRES_PASSWORD=mmuser_password
+      - POSTGRES_DB=mattermost
+
+  app:
+    build:
+      context: mattermost-docker/app
+    restart: unless-stopped
+    volumes:
+      - ./volumes/app/mattermost/config:/mattermost/config:rw
+      - ./volumes/app/mattermost/data:/mattermost/data:rw
+      - ./volumes/app/mattermost/logs:/mattermost/logs:rw
+      - ./volumes/app/mattermost/plugins:/mattermost/plugins:rw
+      - ./volumes/app/mattermost/client-plugins:/mattermost/client/plugins:rw
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - MM_USERNAME=mmuser
+      - MM_PASSWORD=mmuser_password
+      - MM_DBNAME=mattermost
+      - MM_SQLSETTINGS_DATASOURCE=postgres://mmuser:mmuser_password@db:5432/mattermost?sslmode=disable&connect_timeout=10
+
+  web:
+    build: mattermost-docker/web
+    ports:
+      - 80
+      - 443
+    read_only: true
+    restart: unless-stopped
+    volumes:
+      - ./volumes/web/cert:/cert:ro
+      - /etc/localtime:/etc/localtime:ro
+
+  mongodb:
+    image: mongo
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_DATABASE=ltijs
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    volumes:
+      - ./init-mongodb.js:/docker-entrypoint-initdb.d/init-mongodb.js:ro
+
+  mattermost-lti:
+    build: mattermost-lti
+    restart: unless-stopped
