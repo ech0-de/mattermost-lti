@@ -2,7 +2,7 @@ version: "3"
 
 services:
   db:
-    build: mattermost-docker/db
+    image: postgres:12.2
     read_only: true
     restart: unless-stopped
     volumes:
@@ -42,7 +42,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
 
   mongodb:
-    image: mongo
+    image: mongo:4.2.5
     restart: unless-stopped
     environment:
       - MONGO_INITDB_DATABASE=ltijs
