@@ -1,0 +1,3 @@
+[submodule "mattermost-docker"]
+	path = mattermost-docker
+	url = https://github.com/mattermost/mattermost-docker.git
