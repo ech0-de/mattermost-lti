@@ -162,7 +162,7 @@ app.get('/api/v4/user', (req, res) => res.json(decryptToken(req.headers.authoriz
 			}
 			break;
 		} catch(e) {
-			console.log('Retrieving Mattermost API access failed', e.response?.status, e.response?.statusText);
+			console.log('Retrieving Mattermost API access failed', e.response ? (e.response.status + ' ' + e.response.statusText) : '');
 		}
 	}
 
