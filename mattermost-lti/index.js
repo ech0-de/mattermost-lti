@@ -153,7 +153,6 @@ app.get('/api/v4/user', (req, res) => res.json(decryptToken(req.headers.authoriz
                 for (const user of req.data) {
                     users[user.username] = user;
                 }
-                console.log('users', Object.keys(users));
             }
 
             {
@@ -187,7 +186,7 @@ app.get('/api/v4/user', (req, res) => res.json(decryptToken(req.headers.authoriz
         });
 
         // Get the public key generated for that platform
-        console.log('registered platform', clientId, await plat.platformPublicKey());
+        console.log('registered platform', clientId, '\n', await plat.platformPublicKey(), '\n\n');
     }
 
     // Set connection callback
