@@ -16,6 +16,7 @@ services:
     image: mattermost/mattermost-team-edition:release-5.22
     restart: unless-stopped
     volumes:
+      - ./create-access-token.sh:/create-access-token.sh:ro
       - ./volumes/app/mattermost/config:/mattermost/config:rw
       - ./volumes/app/mattermost/data:/mattermost/data:rw
       - ./volumes/app/mattermost/logs:/mattermost/logs:rw
