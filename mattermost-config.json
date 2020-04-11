@@ -281,8 +281,8 @@
         "Id": "CHANGE_ME",
         "Scope": "",
         "AuthEndpoint": "/lti/oauth/authorize",
-        "TokenEndpoint": "/lti/oauth/token",
-        "UserApiEndpoint": "/lti/api/v4/user"
+        "TokenEndpoint": "http://mattermost-lti:3002/oauth/token",
+        "UserApiEndpoint": "http://mattermost-lti:3002/api/v4/user"
     },
     "GoogleSettings": {
         "Enable": false,
