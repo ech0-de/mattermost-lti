@@ -1,13 +1,22 @@
 {
   "name": "mattermost-lti",
   "version": "1.0.0",
-  "description": "",
+  "description": "A LTI OAuth bridge to add a LTI-based authentication to Mattermost.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url" : "https://github.com/ech0-de/mattermost-lti.git",
+    "directory": "mattermost-lti"
+  },
+  "bugs": {
+    "url" : "https://github.com/ech0-de/mattermost-lti/issues"
+  },
+  "author": "ech0 <mail@ech0.de> (https://ech0.de)",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.19.2",
     "cookie-parser": "^1.4.5",

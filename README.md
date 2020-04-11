@@ -1,7 +1,10 @@
 # mattermost-lti
 A dockerized Mattermost instance that can be embedded in a LTI platform, such as Moodle.
+![](https://user-images.githubusercontent.com/1503861/79054796-3f513e80-7c48-11ea-9749-2b00f46c84e1.png)
 
 :warning: Still work in progress! Use with caution! :warning:
+
+If you are thinking of deploying this yourself, maybe just contact me first :sweat_smile:
 
 ## Getting Started
 ### Add Moodle Activity
