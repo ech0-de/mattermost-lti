@@ -3,7 +3,6 @@ version: "3"
 services:
   db:
     image: postgres:12.2
-    read_only: true
     restart: unless-stopped
     volumes:
       - ./volumes/db/var/lib/postgresql/data:/var/lib/postgresql/data
@@ -14,8 +13,7 @@ services:
       - POSTGRES_DB=mattermost
 
   app:
-    build:
-      context: mattermost-docker/app
+    image: mattermost/mattermost-team-edition:release-5.22
     restart: unless-stopped
     volumes:
       - ./volumes/app/mattermost/config:/mattermost/config:rw
@@ -33,12 +31,9 @@ services:
   web:
     image: nginx:1.17.9-alpine
     ports:
-      - 80
-      - 443
-    read_only: true
+      - 80:80
+      - 443:443
     restart: unless-stopped
-    environment:
-      - LTI_HOST=mattermost-lti
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ./volumes/web/cert:/cert:ro
@@ -58,5 +53,7 @@ services:
   mattermost-lti:
     build: mattermost-lti
     restart: unless-stopped
+    env_file:
+      - .env
     volumes:
       - /etc/localtime:/etc/localtime:ro
