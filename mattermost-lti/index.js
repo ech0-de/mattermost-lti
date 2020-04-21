@@ -175,9 +175,9 @@ app.get('/api/v4/user', (req, res) => res.json(decryptToken(req.headers.authoriz
 
     // Register platforms
     for (const platform of process.env.PLATFORMS.split(':')) {
-        const [courseId, clientId] = platform.split('|', 2);
+        const [activityId, clientId] = platform.split('|', 2);
         const plat = await lti.registerPlatform({
-            url: process.env.PLATFORM_URL + '/' + courseId,
+            url: process.env.PLATFORM_URL + '/' + activityId,
             name: process.env.PLATFORM_NAME,
             clientId: clientId,
             authenticationEndpoint: process.env.PLATFORM_AUTH_URL,
@@ -191,7 +191,7 @@ app.get('/api/v4/user', (req, res) => res.json(decryptToken(req.headers.authoriz
 
     // Set connection callback
     lti.onConnect(async (connection, request, response) => {
-        const courseId = response.locals.context.context.label.toLowerCase().replace(/\./g, '');
+        const courseId = response.locals.context.context.label.toLowerCase().replace(/\./g, '').replace(/\+/g, '-');
         const courseName = response.locals.context.context.title;
 
         const userId = response.locals.token.user;
