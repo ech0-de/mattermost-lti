@@ -18,7 +18,7 @@
   "author": "ech0 <mail@ech0.de> (https://ech0.de)",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
